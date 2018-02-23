@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MDB Socials/Controllers/FeedViewController/Cells/EventCollectionViewCell.swift"
+            timestampString = "541044494.810853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "EventCollectionViewCell"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MDB_Socials.EventCollectionViewCell.numInterestedLabel.getter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UILabel&gt;"
+                  moduleName = "MDB Socials"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/frys/Documents/MDB/Week3/MDB%20Socials/MDB%20Socials/Controllers/FeedViewController/Cells/EventCollectionViewCell.swift"
+                  timestampString = "540949639.437112"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "109">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MDB_Socials.EventCollectionViewCell.numInterestedLabel.setter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UILabel&gt;"
+                  moduleName = "MDB Socials"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/frys/Documents/MDB/Week3/MDB%20Socials/MDB%20Socials/Controllers/FeedViewController/Cells/EventCollectionViewCell.swift"
+                  timestampString = "540949639.791642"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MDB_Socials.EventCollectionViewCell.init(frame: __C.CGRect) -&gt; MDB_Socials.EventCollectionViewCell"
+                  moduleName = "MDB Socials"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/frys/Documents/MDB/Week3/MDB%20Socials/MDB%20Socials/Controllers/FeedViewController/Cells/EventCollectionViewCell.swift"
+                  timestampString = "540949639.808107"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "1368">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MDB_Socials.EventCollectionViewCell.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;MDB_Socials.EventCollectionViewCell&gt;"
+                  moduleName = "MDB Socials"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/frys/Documents/MDB/Week3/MDB%20Socials/MDB%20Socials/Controllers/FeedViewController/Cells/EventCollectionViewCell.swift"
+                  timestampString = "540949639.8469861"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "1211">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
