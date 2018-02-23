@@ -11,7 +11,6 @@ import UIKit
 class DetailViewController: UIViewController {
     
     var eventImageView: UIImageView!
-    var eventImage: UIImage!
     var eventPosterLabel: UILabel!
     var eventNameLabel: UILabel!
     var numInterestedLabel: UILabel!
@@ -29,10 +28,11 @@ class DetailViewController: UIViewController {
 
     }
     func setup() {
+        print("THE POST IS")
+        print(selectedPost)
+        print(selectedPost!.posterName!)
         eventImageView = UIImageView(frame: CGRect(x: 20, y: 100, width: view.bounds.width - 38, height: 200));
-        if (eventImage) != nil {
-            eventImageView.image = eventImage
-        }
+        eventImageView.image = selectedPost.image
         eventImageView.contentMode = .scaleAspectFit
         eventImageView.clipsToBounds = true
         eventImageView.layer.cornerRadius = 10

@@ -13,12 +13,12 @@ class EventCollectionViewCell: UICollectionViewCell {
     var eventPost: Post!
     
     var eventImageView: UIImageView!
-    var eventName: String!
-    var posterName: String!
-    var numInterested = [String]()
-    var image: UIImage!
-    var eventDescription: String!
-    var id: String!
+    //var eventName: String!
+    //var posterName: String!
+    //var numInterested = [String]()
+    //var image: UIImage!
+    //var eventDescription: String!
+    //var id: String!
     
     var eventNameLabel: UILabel!
     var posterNameLabel: UILabel!
@@ -36,20 +36,20 @@ class EventCollectionViewCell: UICollectionViewCell {
         eventImageView.clipsToBounds = true
         eventImageView.contentMode = .scaleAspectFit
         eventImageView.layer.borderColor = UIColor.black.cgColor
-        eventImageView.image = image  //delete later
+        eventImageView.image = eventPost.image  //delete later
         contentView.addSubview(eventImageView)
         
         eventNameLabel = UILabel(frame: CGRect(x:125, y:15, width: contentView.frame.width, height: 40))
-        eventNameLabel.text = eventName
+        eventNameLabel.text = eventPost.eventName
         eventNameLabel.font = eventNameLabel.font.withSize(35)
         contentView.addSubview(eventNameLabel)
         
-        posterNameLabel = UILabel(frame: CGRect(x:125, y:65, width: contentView.frame.width, height: 25))
-        posterNameLabel.text = posterName
+        posterNameLabel = UILabel(frame: CGRect(x:125, y:70, width: contentView.frame.width, height: 25))
+        posterNameLabel.text = eventPost.posterName
         contentView.addSubview(posterNameLabel)
         
         numInterestedLabel = UILabel(frame: CGRect(x:125, y:105, width: contentView.frame.width, height: 15))
-        numInterestedLabel.text = "\(numInterested.count) people interested" //delete later
+        numInterestedLabel.text = "\(eventPost.interested.count) people interested" //delete later
         contentView.addSubview(numInterestedLabel)
 
         

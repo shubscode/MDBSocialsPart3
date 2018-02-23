@@ -244,21 +244,7 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
         })
         
         
-//        var postDict = [String: Any]()
-//        if let userId = Auth.auth().currentUser {
-//            if let user = Users.getCurrentUser(withId: userId, block: <#T##(User) -> ()#>)
-//            postDict["eventName"] = eventName
-//            postDict["posterNme"] = user.name
-//            postDict["posterId"] =  user.id
-//            postDict["image"] = imagePicked.image
-//            postDict["numInterested"] = 0
-//            postDict["description"] = eventDescription
-//            postDict["eventDate"] = eventDate
-//        }
-//        FirebaseAPIClient.createNewPost(postDict: postDict)
-//        readEventInfo()
-//        
-//        self.dismiss(animated: true, completion: {})
+
     }
 
 }

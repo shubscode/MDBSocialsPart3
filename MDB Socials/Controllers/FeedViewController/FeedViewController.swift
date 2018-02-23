@@ -96,7 +96,7 @@ class FeedViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToDetail" {
+        if segue.identifier == "toEventDetails" {
             let detailViewController = segue.destination as! DetailViewController
             detailViewController.selectedPost = postToPass
         }
@@ -118,12 +118,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = eventCollectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCollectionViewCell
         let selectedEvent = posts[indexPath.row]
 
-        cell.eventName = selectedEvent.eventName
-        cell.image = selectedEvent.image
-        cell.posterName = selectedEvent.posterName
-        cell.numInterested = selectedEvent.interested
-        cell.eventDescription = selectedEvent.eventDescription
-        cell.id = selectedEvent.id
+        cell.eventPost = selectedEvent
         cell.awakeFromNib()
         
         cell.layer.borderWidth = 0.5
