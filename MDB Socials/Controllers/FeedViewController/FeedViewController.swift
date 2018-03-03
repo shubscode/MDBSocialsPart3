@@ -12,10 +12,9 @@ import FirebaseDatabase
 
 class FeedViewController: UIViewController {
 
+    var backgroundImage: UIImageView!
+
     var eventCollectionView: UICollectionView!
-    
-    var customBlue = UIColor(hue: 0.5472, saturation: 0.75, brightness: 0.94, alpha: 1.0)
-    var customWhite = UIColor(hue: 0.5972, saturation: 0.24, brightness: 0.95, alpha: 1.0)
     
     //var newEventButton: UIButton!
     var logoutButton: UIButton!
@@ -26,14 +25,14 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        createBackground()
         setupPosts()
         fetchPosts()
         changePosts()
         
         let item1 = UIBarButtonItem(title: "Add New Event", style: .plain, target: self, action: #selector(createNewEvent))
         self.navigationItem.setRightBarButtonItems([item1], animated: true)
-        setUpCollectionView()
+        //setUpCollectionView()
         
         let item2 = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logoutUser))
         self.navigationItem.setLeftBarButtonItems([item2], animated: true)
@@ -52,7 +51,8 @@ class FeedViewController: UIViewController {
         eventCollectionView.register(EventCollectionViewCell.self, forCellWithReuseIdentifier: "eventCell")
         eventCollectionView.delegate = self
         eventCollectionView.dataSource = self
-        eventCollectionView.layer.backgroundColor = customBlue.cgColor
+        eventCollectionView.backgroundColor = Constants.loginColor
+        //eventCollectionView.layer.backgroundColor = customWhite as! CGColor
         view.addSubview(eventCollectionView)
     }
     
@@ -91,15 +91,20 @@ class FeedViewController: UIViewController {
         eventCollectionView.delegate = self
         eventCollectionView.dataSource = self
         eventCollectionView.register(EventCollectionViewCell.self, forCellWithReuseIdentifier: "eventCell")
-        eventCollectionView.backgroundColor = UIColor(red: 67.0/255.0, green: 130.0/255.0, blue: 232.0/255.0, alpha: 1.0)
+        eventCollectionView.backgroundColor = Constants.loginColor
         view.addSubview(eventCollectionView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEventDetails" {
             let detailViewController = segue.destination as! DetailViewController
-            detailViewController.selectedPost = postToPass
+            detailViewController.post = postToPass
         }
+    }
+    func createBackground() {
+        backgroundImage = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        backgroundImage.backgroundColor = Constants.loginColor
+        view.addSubview(backgroundImage)
     }
 
     
@@ -117,16 +122,30 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = eventCollectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCollectionViewCell
         let selectedEvent = posts[indexPath.row]
+        
+        cell.title = selectedEvent.eventName
+        cell.image = selectedEvent.image
+        cell.content = selectedEvent.eventDescription
+        cell.date = selectedEvent.eventDate
+        cell.name = selectedEvent.posterName
+        print(selectedEvent.interested)
+        cell.interested = "Interested: \(selectedEvent.interested.count-1)"
 
-        cell.eventPost = selectedEvent
+        //cell.eventPost = selectedEvent
         cell.awakeFromNib()
         
         cell.layer.borderWidth = 0.5
         cell.layer.borderColor = UIColor.black.cgColor
         return cell
     }
+
+    override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
+        return CGSize(width: eventCollectionView.bounds.width, height: 150)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 150)
+        //return CGSize(width: UIScreen.main.bounds.width - 20, height: 200)
+        return CGSize(width: view.frame.width * 0.9, height: 140)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)

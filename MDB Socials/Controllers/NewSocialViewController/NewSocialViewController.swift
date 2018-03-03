@@ -209,7 +209,6 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
     
     @objc func toImagePicker() {
         readEventInfo()
-        print("helpppp")
         self.performSegue(withIdentifier: "toImagePicker", sender: self)
     }
     
@@ -219,22 +218,22 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         let eventImageData = UIImageJPEGRepresentation(imagePicked.image!, 0.9)
-        ref.child("Users").child((Auth.auth().currentUser?.uid)!).child("name").observeSingleEvent(of: .value, with: {(snapshot) in
+        let userID = Auth.auth().currentUser?.uid
+        print(userID)
+            ref.child("Users").child(userID!).child("name").observeSingleEvent(of: .value, with: {(snapshot) in
             let name = snapshot.value
             let user = name! as? String
-            
-            let newPost = ["name" : self.eventName, "text": self.eventDescription, "date": self.eventDate, "poster": user, "interested": [""]] as [AnyHashable : Any]
+            print("USER IS \(user)")
+            let newPost = ["name" : self.eventName, "text": self.eventDescription, "date": self.eventDate, "poster": user,"interested": [""]] as [AnyHashable : Any]
             let postRef = Database.database().reference().child("Posts")
             let key = postRef.childByAutoId().key
             let update = ["/\(key)/" : newPost]
             //print("GOT TO HEREEEE AGAIN")
             let storageRef = Storage.storage().reference().child("Posts").child(key)
-            print("GOT TO HEREEEE")
             storageRef.putData(eventImageData!, metadata: metadata, completion: { (metadata, error) in
                 if error != nil {
                     print(error)
                 } else {
-                    print("GOT TO HEREEEE AGAIN")
                     postRef.updateChildValues(update)
                     self.dismiss(animated: true)
                 }

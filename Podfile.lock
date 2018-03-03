@@ -1,4 +1,21 @@
 PODS:
+  - Alamofire (4.5.1)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
+  - DGActivityIndicatorView (2.1.1)
+  - FBSDKCoreKit (4.10.1):
+    - Bolts (~> 1.5)
+  - FBSDKLoginKit (4.10.1):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.10.1):
+    - FBSDKCoreKit
   - Firebase/Auth (4.5.0):
     - Firebase/Core
     - FirebaseAuth (= 4.3.1)
@@ -43,6 +60,8 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
   - GTMSessionFetcher/Core (1.1.12)
+  - HanekeSwift (0.10.1)
+  - JGProgressHUD (2.0)
   - leveldb-library (1.20)
   - MKSpinner (1.4)
   - nanopb (0.3.8):
@@ -50,17 +69,73 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - ObjectMapper (3.0.0)
+  - PromiseKit (4.4.4):
+    - PromiseKit/Foundation (= 4.4.4)
+    - PromiseKit/QuartzCore (= 4.4.4)
+    - PromiseKit/UIKit (= 4.4.4)
+  - PromiseKit/Alamofire (4.4.4):
+    - Alamofire (~> 4.0)
+    - PromiseKit/CorePromise
+  - PromiseKit/CorePromise (4.4.4)
+  - PromiseKit/Foundation (4.4.4):
+    - PromiseKit/CorePromise
+  - PromiseKit/QuartzCore (4.4.4):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (4.4.4):
+    - PromiseKit/CorePromise
+  - Spring (1.0.3)
   - SwiftDate (4.4.2)
+  - SwiftyBeaver (1.4.2)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
+  - DGActivityIndicatorView
+  - FBSDKCoreKit (from `https://raw.githubusercontent.com/chrisp-fb/facebook-ios-sdk/master/FBSDKCoreKit.podspec`)
+  - FBSDKLoginKit (~> 4.10.0)
+  - FBSDKShareKit (~> 4.10.0)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - HanekeSwift (from `https://github.com/Haneke/HanekeSwift.git`, branch `feature/swift-3`)
+  - JGProgressHUD
   - MKSpinner
+  - ObjectMapper
+  - PromiseKit (~> 4.0)
+  - PromiseKit/Alamofire
+  - Spring
   - SwiftDate (~> 4.0)
+  - SwiftyBeaver
+  - SwiftyJSON
+
+EXTERNAL SOURCES:
+  ChameleonFramework:
+    :git: https://github.com/ViccAlexander/Chameleon.git
+  FBSDKCoreKit:
+    :podspec: https://raw.githubusercontent.com/chrisp-fb/facebook-ios-sdk/master/FBSDKCoreKit.podspec
+  HanekeSwift:
+    :branch: feature/swift-3
+    :git: https://github.com/Haneke/HanekeSwift.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
+    :git: https://github.com/ViccAlexander/Chameleon.git
+  HanekeSwift:
+    :commit: 2f6d87f1f725d204d85cb34492e8c399cd5a200f
+    :git: https://github.com/Haneke/HanekeSwift.git
 
 SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  DGActivityIndicatorView: ff2c76073d79692f724863c8dd38685866a03cb6
+  FBSDKCoreKit: 0c3be73d1cd4c0d6180d148ab31ae3c17cfb95ff
+  FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
+  FBSDKShareKit: 2fd887cce0056bdda91f99b2021d724a4fed8e88
   Firebase: d83d287bdb6b1c78320561482706d1fcfc8ddfc1
   FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
   FirebaseAuth: e7c2b1359c2df4af23a568100a8eace0b8c507e4
@@ -70,11 +145,18 @@ SPEC CHECKSUMS:
   FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
+  JGProgressHUD: c402c0f41fc291ca7e33bba2f999118d9682dd9c
   leveldb-library: 44ef425bfde64f5b41daef86b38db2d13edbbee1
   MKSpinner: 342cc7f8fbb365dd139a8ad28a0a987cca440a3a
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
+  PromiseKit: 6178219c4c7457ae90d7d8b34b7ac5eb36916519
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SwiftDate: 131cf2f09b390f0a07f0099e36005ffe2fbf4c7e
+  SwiftyBeaver: 91057725648ee4980308f1650af077d04b3654a0
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: a9c29f03427f8875145f90a6cc429e5367ebe09b
+PODFILE CHECKSUM: fa106502fe923fb349d176029755ddcfc883b977
 
 COCOAPODS: 1.4.0

@@ -35,7 +35,6 @@ class Post {
             self.posterName = poster
         }
         if let interested = postDict!["interested"] as? [String] {
-            print("1351345134523456234625")
             self.interested = interested
         }
     }

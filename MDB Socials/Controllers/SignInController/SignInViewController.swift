@@ -30,14 +30,17 @@ class SignInViewController: UIViewController {
     var backgroundColours = [UIImage()]
     var backgroundLoop = 0
     
+    var backgroundImage: UIImageView!
+    
     var customBlue = UIColor(hue: 0.5472, saturation: 0.75, brightness: 0.94, alpha: 1.0)
     var customWhite = UIColor(hue: 0.5972, saturation: 0.24, brightness: 0.95, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        createBackground()
         setup()
-        setBackground()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,14 +50,19 @@ class SignInViewController: UIViewController {
         }
     }
     
-    func setBackground() {
-        
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = #imageLiteral(resourceName: "starSky")
-        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
-        self.view.insertSubview(backgroundImage, at: 0)
+//    func setBackground() {
+//
+//        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+//        backgroundImage.image = #imageLiteral(resourceName: "starSky")
+//        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+//        self.view.insertSubview(backgroundImage, at: 0)
+//    }
+    //Create background
+    func createBackground() {
+        backgroundImage = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        backgroundImage.backgroundColor = Constants.loginColor
+        view.addSubview(backgroundImage)
     }
-    
     func setup() {
         
         mdbLogo = UIImageView(frame: CGRect(x: view.frame.midX - 85, y: 10, width: 170, height: 300))
@@ -63,13 +71,11 @@ class SignInViewController: UIViewController {
         view.addSubview(mdbLogo)
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 300, width: view.frame.width, height: 50))
-        //titleLabel.font = UIFont.systemFont(ofSize: 34, weight: 3)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.font = titleLabel.font.withSize(60)
-        titleLabel.textColor = customWhite
+        titleLabel.textColor = Constants.textColor
         titleLabel.textAlignment = .center
         titleLabel.text = "MDB Socials"
-        //titleLabel.numberOfLines = 2
         view.addSubview(titleLabel)
         
         emailTextField = UITextField(frame: CGRect(x: 20, y: 370, width: view.frame.width - 40, height: 50))
@@ -87,7 +93,7 @@ class SignInViewController: UIViewController {
         
         signUpLabel = UILabel(frame: CGRect(x: 20, y: 570, width: view.frame.width - 40, height: 50))
         signUpLabel.text = "Don't have an account yet?"
-        signUpLabel.textColor = customBlue
+        signUpLabel.textColor = Constants.textColor
         signUpLabel.textAlignment = .center
         view.addSubview(signUpLabel)
         
@@ -106,9 +112,6 @@ class SignInViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(toFeedView), for: .touchUpInside)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-        
         view.addGestureRecognizer(tap)
     }
     
@@ -160,9 +163,6 @@ class SignInViewController: UIViewController {
     }
     
     @objc func toFeedView() {
-        print("wtf")
-        print(email)
-        print(password)
         readInputs()
         if email != nil && password != nil {
             print("i better print this")

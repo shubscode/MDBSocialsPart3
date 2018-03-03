@@ -8,6 +8,9 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseDatabase
+import PromiseKit
+
 
 class UserAuthHelper {
     
@@ -20,6 +23,18 @@ class UserAuthHelper {
                 withBlock2()
             }
         })
+    }
+    
+    static func signIn(email: String, password: String) -> Promise<FirebaseAuth.User> {
+        return Promise { fulfill, reject in
+            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                if error != nil {
+                    reject(error!)
+                } else {
+                    fulfill(user!)
+                }
+            }
+        }
     }
 
     static func logOut(withBlock: @escaping ()->()) {

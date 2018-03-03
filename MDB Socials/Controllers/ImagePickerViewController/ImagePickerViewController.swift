@@ -33,25 +33,10 @@ UINavigationControllerDelegate {
         super.viewDidLoad()
         setup()
         setBackground()
-//        let lightBlue = UIColor(hue: 0.5667, saturation: 0.58, brightness: 0.96, alpha: 1.0)
-//        let midBlue = UIColor(hue: 0.5667, saturation: 0.72, brightness: 0.96, alpha: 1.0)
-//        let darkBlue = UIColor(hue: 0.5667, saturation: 0.82, brightness: 0.96, alpha: 1.0)
-//        backgroundColours = [lightBlue, midBlue, darkBlue]
-//        backgroundLoop = 0
-        // Do any additional setup after loading the view.
+
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        imagePicked = UIImageView(frame: CGRect(x: 0, y:20, width: view.frame.width, height: view.frame.midY + 30))
-//    }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        imagePicked = UIImageView(frame: CGRect(x: 0, y:20, width: view.frame.width, height: view.frame.midY + 30))
-//        imagePicked.contentMode = .scaleAspectFit
-//        imagePicked.image = currentImage
-//        imagePicked.layer.borderColor = UIColor.black.cgColor
-//        view.addSubview(imagePicked)
-//    }
+
     func setup() {
         imagePicked = UIImageView(frame: CGRect(x: 20, y:50, width: view.frame.width - 40, height: view.frame.width))
         imagePicked.image = #imageLiteral(resourceName: "startingImage")
