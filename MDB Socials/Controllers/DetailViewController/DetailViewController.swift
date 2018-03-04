@@ -29,6 +29,9 @@ class DetailViewController: UIViewController {
     //Post Date
     var postDateTextField: UILabel!
     
+    //Post Location
+    var postLocationTextField: UILabel!
+    
     //Event Image View
     var eventImageView : UIImageView!
     
@@ -115,7 +118,7 @@ class DetailViewController: UIViewController {
         interestedButton.backgroundColor = .white
         interestedButton.setTitle("Interested?", for: .normal)
         interestedButton.setTitleColor(UIColor(red: 67.0/255.0, green: 130.0/255.0, blue: 232.0/255.0, alpha: 1.0), for: .normal)
-        if(post.interested.contains((Auth.auth().currentUser?.uid)!)){
+        if(post.getInterestedUserIds().contains((Auth.auth().currentUser?.uid)!)){
             interestedButton.isEnabled = false
             interestedButton.setTitle("You are already interested", for: .normal)
         } else {
@@ -126,12 +129,22 @@ class DetailViewController: UIViewController {
     
     //Function to increase the number of those interested
     @objc func increaseInterested() {
-        interestedButton.isEnabled = false
-        interestedButton.setTitle("You are already interested", for: .normal)
-        post.interested.append((Auth.auth().currentUser?.uid)!)
-        let postRef = Database.database().reference().child("Posts").child(post.id!)
-        let update = ["interested" : post.interested]
-        postRef.updateChildValues(update)
+        
+        FirebaseAPIClient.updateInterested(postId: post.id!, userId: (UserAuthHelper.getCurrentUser()?.uid)!).then { success -> Void in
+            print("Updated interested")
+            
+            self.interestedButton.isEnabled = false
+            self.interestedButton.setTitle("You are already interested", for: .normal)
+            self.post.addInterestedUser(userID: (UserAuthHelper.getCurrentUser()?.uid)!)
+            //self.interestedLabel.text = "Members Interested: " + String(describing: self.viewController.post.getInterestedUserIds().count)
+        }
+        
+//        interestedButton.isEnabled = false
+//        interestedButton.setTitle("You are already interested", for: .normal)
+//        post.addInterestedUser(userID: (Auth.auth().currentUser?.uid)!)
+//        let postRef = Database.database().reference().child("Posts").child(post.id!)
+//        let update = ["interested" : post.interested]
+//        postRef.updateChildValues(update)
     }
     
 

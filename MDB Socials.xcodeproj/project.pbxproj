@@ -115,6 +115,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		512783E3204B84BD009228DB /* Firebase Client */ = {
+			isa = PBXGroup;
+			children = (
+				51BDB041203B9EC1003914F5 /* FirebaseAPIClient.swift */,
+				51BDB049203BB862003914F5 /* UserAuthHelper.swift */,
+			);
+			path = "Firebase Client";
+			sourceTree = "<group>";
+		};
 		515B5E5720493EFA00004E65 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,9 +159,8 @@
 			children = (
 				51BDB037203B9596003914F5 /* GoogleService-Info.plist */,
 				51BDAFFC203B6E3E003914F5 /* AppDelegate.swift */,
-				51BDB040203B9E65003914F5 /* Client */,
 				515B5E5720493EFA00004E65 /* Constants */,
-				51BDB044203B9F75003914F5 /* View */,
+				512783E3204B84BD009228DB /* Firebase Client */,
 				51BDB043203B9F57003914F5 /* Model */,
 				51BDB039203B9D43003914F5 /* Controllers */,
 				51BDB000203B6E3E003914F5 /* Main.storyboard */,
@@ -160,8 +168,6 @@
 				51BDB008203B6E3E003914F5 /* LaunchScreen.storyboard */,
 				51BDB00B203B6E3E003914F5 /* Info.plist */,
 				51BDB003203B6E3E003914F5 /* MDB_Socials.xcdatamodeld */,
-				51BDB041203B9EC1003914F5 /* FirebaseAPIClient.swift */,
-				51BDB049203BB862003914F5 /* UserAuthHelper.swift */,
 			);
 			path = "MDB Socials";
 			sourceTree = "<group>";
@@ -238,13 +244,6 @@
 			path = NewSocialViewController;
 			sourceTree = "<group>";
 		};
-		51BDB040203B9E65003914F5 /* Client */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Client;
-			sourceTree = "<group>";
-		};
 		51BDB043203B9F57003914F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,13 +251,6 @@
 				51BDB047203BA08A003914F5 /* Post.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		51BDB044203B9F75003914F5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		51BDB04D203CEA7D003914F5 /* Cells */ = {

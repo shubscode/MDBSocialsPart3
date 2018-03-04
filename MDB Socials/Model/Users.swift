@@ -9,31 +9,47 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
+import ObjectMapper
+import PromiseKit
 
-class Users {
+class Users : Mappable {
+    
     var name: String?
     var email: String?
-    
+    var profilePicture: UIImage?
     var username: String?
-    var password: String?
-    //var imageUrl: String?
+    var profilePictureURL: String?
     var id: String?
     
-    init(id: String, userDict: [String:Any]?) {
-        self.id = id
-        if userDict != nil {
-            if let name = userDict!["name"] as? String {
-                self.name = name
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id                  <- map["id"]
+        name                <- map["name"]
+        username            <- map["username"]
+        profilePictureURL   <- map["profilePictureURL"]
+        email               <- map["email"]
+    }
+    
+    func getPicture() -> Promise<UIImage> {
+        return Promise { fulfill, _ in
+            let urlReference = Storage.storage().reference(forURL: profilePictureURL!)
+            urlReference.getData(maxSize: 30 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print("Error getting image")
+                    print(error.localizedDescription)
+                } else {
+                    let image = UIImage(data: data!)!
+                    fulfill(image)
+                }
             }
-            if let email = userDict!["email"] as? String {
-                self.email = email
-            }
-            if let username = userDict!["username"] as? String {
-                self.username = username
-            }
-            
         }
     }
+    
+
     
 //    static func getCurrentUser(withId: String, block: @escaping (User) -> ()) {
 //        FirebaseAPIClient.fetchPosts(id: withId, withBlock: {(user) in

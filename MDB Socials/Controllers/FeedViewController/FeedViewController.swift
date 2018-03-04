@@ -27,7 +27,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         createBackground()
         setupPosts()
-        fetchPosts()
+        //fetchPosts()
         changePosts()
         
         let item1 = UIBarButtonItem(title: "Add New Event", style: .plain, target: self, action: #selector(createNewEvent))
@@ -61,22 +61,22 @@ class FeedViewController: UIViewController {
     }
     
     @objc func logoutUser() {
-        UserAuthHelper.logOut(withBlock:
-            {self.performSegue(withIdentifier: "logoutSegue", sender: self)});
-        
+        UserAuthHelper.logOut().then {success -> Void in
+            self.performSegue(withIdentifier: "logoutSegue", sender: self)
+        }
         
     }
     
-    func fetchPosts() {
-        let ref = Database.database().reference()
-        ref.child("Posts").observe(.childAdded, with: { (snapshot) in
-            let post = Post(id: snapshot.key, postDict: snapshot.value as! [String : Any]?)
-            self.posts.insert(post, at: 0)
-            post.getProfilePic(withBlock: {
-                self.eventCollectionView.reloadData()
-            })
-        })
-    }
+//    func fetchPosts() {
+//        let ref = Database.database().reference()
+//        ref.child("Posts").observe(.childAdded, with: { (snapshot) in
+//            let post = Post(id: snapshot.key, postDict: snapshot.value as! [String : Any]?)
+//            self.posts.insert(post, at: 0)
+//            post.getProfilePic(withBlock: {
+//                self.eventCollectionView.reloadData()
+//            })
+//        })
+//    }
     
     func changePosts() {
         let ref = Database.database().reference()
@@ -128,8 +128,9 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.content = selectedEvent.eventDescription
         cell.date = selectedEvent.eventDate
         cell.name = selectedEvent.posterName
-        print(selectedEvent.interested)
-        cell.interested = "Interested: \(selectedEvent.interested.count-1)"
+        var numInterested =
+        print(selectedEvent.getNumInterested())
+        cell.interested = "Interested: \(selectedEvent.getNumInterested())"
 
         //cell.eventPost = selectedEvent
         cell.awakeFromNib()
