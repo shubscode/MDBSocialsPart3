@@ -142,9 +142,9 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell.imageView.image = selectedEvent.image
             }
         }
-        else{
-            cell.imageView.image = selectedEvent.image
-        }
+//        else{
+//            cell.imageView.image = selectedEvent.image
+//        }
         
         cell.title = selectedEvent.eventName
         cell.image = selectedEvent.image

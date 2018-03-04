@@ -11,7 +11,7 @@ import UIKit
 class InterestedUsersViewController: UIViewController {
 
     var userIDArray: [String]?
-    var usersArray: [Users] = []
+    var filteredUsers: [Users] = []
     
     var tableView: UITableView!
     
@@ -25,7 +25,7 @@ class InterestedUsersViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorColor = .clear
-        tableView.register(EventCollectionViewCell.self, forCellReuseIdentifier: "user")
+        tableView.register(InterestedPplTableViewCell.self, forCellReuseIdentifier: "user")
         view.addSubview(tableView)
     }
     
@@ -34,7 +34,7 @@ class InterestedUsersViewController: UIViewController {
             for u in userIDArray!{
                 print("Getting User")
                 FirebaseAPIClient.getUserWithId(id: u).then {user in
-                    self.usersArray.append(user)
+                    self.filteredUsers.append(user)
                     }.then {
                         self.tableView.reloadData()
                 }
@@ -54,25 +54,32 @@ extension InterestedUsersViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usersArray.count
+        print("FILTERED USERS ARE \(filteredUsers)")
+        return filteredUsers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "user", for: indexPath) as! EventCollectionViewCell
-        let user = usersArray[indexPath.row]
-        cell.awakeFromNib()
-        cell.titleLabel.text = user.name!
-        cell.posterNameLabel.text = user.username!
-        cell.startLoadingView()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "user", for: indexPath) as! InterestedPplTableViewCell
+        let user = filteredUsers[indexPath.row]
+        print(userIDArray)
+        print("CREATING USERS")
+        print(user)
+        print(user.id)
+        cell.name.text = user.name!
         if user.profilePicture == nil {
             user.getPicture().then { picture in
                 DispatchQueue.main.async {
                     user.profilePicture = picture
-                    cell.mainImageView.image = picture
-                    cell.stopLoadingView()
+                    cell.userImageView.image = picture
                 }
             }
         }
+        
+            
+        cell.awakeFromNib()
+        
+        cell.isUserInteractionEnabled = false
+        
         return cell
     }
     

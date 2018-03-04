@@ -52,7 +52,7 @@ class DetailViewController: UIViewController {
         createPostBody()
         createPostDate()
         createInterestedButton()
-        
+        createWhosInterested()
         createMapView()
         createGetDirectionsButton()
     }
@@ -132,10 +132,13 @@ class DetailViewController: UIViewController {
         interestedButton.backgroundColor = UIColor.lightGray
         interestedButton.backgroundColor = .white
         interestedButton.setTitle("Interested?", for: .normal)
-        interestedButton.setTitleColor(UIColor(red: 67.0/255.0, green: 130.0/255.0, blue: 232.0/255.0, alpha: 1.0), for: .normal)
+        
+        interestedButton.setTitleColor(Constants.loginColor, for: .normal)
+        interestedButton.titleLabel?.adjustsFontSizeToFitWidth = true
         if(post.getInterestedUserIds().contains((Auth.auth().currentUser?.uid)!)){
             interestedButton.isEnabled = false
             interestedButton.setTitle("Already interested", for: .normal)
+            interestedButton.titleLabel?.adjustsFontSizeToFitWidth = true
         } else {
             interestedButton.addTarget(self, action: #selector(increaseInterested), for: .touchUpInside)
         }
@@ -143,7 +146,7 @@ class DetailViewController: UIViewController {
     }
     
     func createGetDirectionsButton() {
-        getDirectionsButton = UIButton(frame: CGRect(x: view.frame.width * 0.3167, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
+        getDirectionsButton = UIButton(frame: CGRect(x: view.frame.width * 0.37, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
         getDirectionsButton.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
         getDirectionsButton.layer.cornerRadius = 10
         getDirectionsButton.setTitle("Get Directions", for: .normal)
@@ -154,14 +157,14 @@ class DetailViewController: UIViewController {
     }
     
     func createWhosInterested() {
-        getDirectionsButton = UIButton(frame: CGRect(x: view.frame.width * 0.5833, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
-        getDirectionsButton.addTarget(self, action: #selector(whosInterestedSegue), for: .touchUpInside)
-        getDirectionsButton.layer.cornerRadius = 10
-        getDirectionsButton.setTitle("Who's Interested", for: .normal)
-        getDirectionsButton.setTitleColor(Constants.loginColor, for: .normal)
-        getDirectionsButton.backgroundColor = .white
-        getDirectionsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        view.addSubview(getDirectionsButton)
+        whosInterested = UIButton(frame: CGRect(x: view.frame.width * 0.6833, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
+        whosInterested.addTarget(self, action: #selector(whosInterestedSegue), for: .touchUpInside)
+        whosInterested.layer.cornerRadius = 10
+        whosInterested.setTitle("Who's Interested", for: .normal)
+        whosInterested.setTitleColor(Constants.loginColor, for: .normal)
+        whosInterested.backgroundColor = .white
+        whosInterested.titleLabel?.adjustsFontSizeToFitWidth = true
+        view.addSubview(whosInterested)
     }
     
     @objc func getDirections(){
@@ -174,6 +177,14 @@ class DetailViewController: UIViewController {
     @objc func whosInterestedSegue(){
         performSegue(withIdentifier: "toWhosInterested", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is InterestedUsersViewController {
+            let dest = segue.destination as! InterestedUsersViewController
+            dest.userIDArray = post.interestedUserIds
+        }
+    }
+
     
     //Function to increase the number of those interested
     @objc func increaseInterested() {
