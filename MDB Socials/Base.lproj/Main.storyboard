@@ -60,10 +60,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="0vO-Mx-00P"/>
                     </view>
+                    <connections>
+                        <segue destination="ugc-9t-x1r" kind="show" identifier="toWhosInterested" id="JtO-43-Myx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="82V-MH-amP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1772" y="125"/>
+            <point key="canvasLocation" x="1817" y="125"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eYx-wR-Q8k">
+            <objects>
+                <viewController id="ugc-9t-x1r" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bhY-XX-Tbm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="2LE-pi-2Vq"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FcG-mR-Okm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2538" y="125"/>
         </scene>
         <!--New Social View Controller-->
         <scene sceneID="cHf-ji-7B8">

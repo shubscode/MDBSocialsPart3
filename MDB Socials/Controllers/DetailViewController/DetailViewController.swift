@@ -8,14 +8,17 @@
 
 import UIKit
 import Firebase
+import MapKit
 
 class DetailViewController: UIViewController {
     
     //Background Image
     var backgroundImage: UIImageView!
     
-    //Return to post button
-    var returnButton: UIButton!
+    var mapView: MKMapView!
+    var getDirectionsButton: UIButton!
+    
+    var whosInterested: UIButton!
     
     //Post Given
     var post: Post!
@@ -49,6 +52,9 @@ class DetailViewController: UIViewController {
         createPostBody()
         createPostDate()
         createInterestedButton()
+        
+        createMapView()
+        createGetDirectionsButton()
     }
     
     //Create background
@@ -61,7 +67,7 @@ class DetailViewController: UIViewController {
     
     //Create the EventImageView
     func createEventImageView() {
-        eventImageView = UIImageView(frame: CGRect(x: view.frame.width * 0.05, y: view.frame.height * 0.13, width: view.frame.width * 0.9, height: view.frame.height * 0.27))
+        eventImageView = UIImageView(frame: CGRect(x: view.frame.width * 0.05, y: view.frame.height * 0.13, width: view.frame.width * 0.6, height: view.frame.height * 0.27))
         eventImageView.layer.cornerRadius = 8
         eventImageView.clipsToBounds = true
         eventImageView.backgroundColor = .white
@@ -69,6 +75,15 @@ class DetailViewController: UIViewController {
         eventImageView.image = post.image!
         view.addSubview(eventImageView)
     }
+    
+    func createMapView() {
+        mapView = MKMapView(frame: CGRect(x: view.frame.width * 0.65, y: view.frame.height * 0.13, width: view.frame.width * 0.35, height: view.frame.height * 0.27))
+        mapView.mapType = .standard
+        mapView.layer.cornerRadius = 10
+        mapView.layer.masksToBounds = true
+        view.addSubview(mapView)
+    }
+    
     
     func createPostTitle() {
         postTitleTextField = UILabel(frame: CGRect(x: view.frame.width * 0.05, y: view.frame.height * 0.42, width: view.frame.width * 0.45, height: view.frame.height * 0.16))
@@ -112,7 +127,7 @@ class DetailViewController: UIViewController {
     
     //Create a button to increase the interested number
     func createInterestedButton() {
-        interestedButton = UIButton(frame: CGRect(x: view.frame.width * 0.05, y: view.frame.height * 0.8, width: view.frame.width * 0.9, height: view.frame.height * 0.1))
+        interestedButton = UIButton(frame: CGRect(x: view.frame.width * 0.05, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
         interestedButton.layer.cornerRadius = 8
         interestedButton.backgroundColor = UIColor.lightGray
         interestedButton.backgroundColor = .white
@@ -120,11 +135,44 @@ class DetailViewController: UIViewController {
         interestedButton.setTitleColor(UIColor(red: 67.0/255.0, green: 130.0/255.0, blue: 232.0/255.0, alpha: 1.0), for: .normal)
         if(post.getInterestedUserIds().contains((Auth.auth().currentUser?.uid)!)){
             interestedButton.isEnabled = false
-            interestedButton.setTitle("You are already interested", for: .normal)
+            interestedButton.setTitle("Already interested", for: .normal)
         } else {
             interestedButton.addTarget(self, action: #selector(increaseInterested), for: .touchUpInside)
         }
         view.addSubview(interestedButton)
+    }
+    
+    func createGetDirectionsButton() {
+        getDirectionsButton = UIButton(frame: CGRect(x: view.frame.width * 0.3167, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
+        getDirectionsButton.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
+        getDirectionsButton.layer.cornerRadius = 10
+        getDirectionsButton.setTitle("Get Directions", for: .normal)
+        getDirectionsButton.setTitleColor(Constants.loginColor, for: .normal)
+        getDirectionsButton.backgroundColor = .white
+        getDirectionsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        view.addSubview(getDirectionsButton)
+    }
+    
+    func createWhosInterested() {
+        getDirectionsButton = UIButton(frame: CGRect(x: view.frame.width * 0.5833, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
+        getDirectionsButton.addTarget(self, action: #selector(whosInterestedSegue), for: .touchUpInside)
+        getDirectionsButton.layer.cornerRadius = 10
+        getDirectionsButton.setTitle("Who's Interested", for: .normal)
+        getDirectionsButton.setTitleColor(Constants.loginColor, for: .normal)
+        getDirectionsButton.backgroundColor = .white
+        getDirectionsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        view.addSubview(getDirectionsButton)
+    }
+    
+    @objc func getDirections(){
+        let urlString = "http://maps.apple.com/?saddr=&daddr=\(post.latitude!),\(post.longitude!)"
+        let url = URL(string: urlString)
+        UIApplication.shared.open(url!)
+    }
+    
+    
+    @objc func whosInterestedSegue(){
+        performSegue(withIdentifier: "toWhosInterested", sender: self)
     }
     
     //Function to increase the number of those interested

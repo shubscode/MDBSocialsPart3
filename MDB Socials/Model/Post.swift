@@ -43,6 +43,7 @@ class Post: Mappable {
         id                         <- map["postId"]
         latitude                   <- map["latitude"]
         longitude                  <- map["longitude"]
+        posterName                 <- map["posterName"]
         
     }
     
@@ -70,6 +71,13 @@ class Post: Mappable {
         return getInterestedUserIds().count
     }
     
+    func getPostDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        return dateFormatter.date(from: eventDate!)!
+        }
+    
+    
     func getPicture() -> Promise<Bool> {
         return Promise { fufill, _ in
             if self.image == nil {
@@ -85,7 +93,7 @@ class Post: Mappable {
     }
     
 
-   
+}
 //    var eventDescription: String?
 //    var eventDate: String?
 //    var eventName: String?
@@ -125,4 +133,4 @@ class Post: Mappable {
 //        }
 //    }
     
-}
+

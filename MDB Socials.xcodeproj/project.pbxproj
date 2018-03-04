@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		514CFA7F204BD40F0011FD04 /* InterestedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514CFA7E204BD40F0011FD04 /* InterestedUsersViewController.swift */; };
+		514CFA82204BD5280011FD04 /* InterestedPplTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514CFA81204BD5280011FD04 /* InterestedPplTableViewCell.swift */; };
 		515B5E5920493F1F00004E65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515B5E5820493F1E00004E65 /* Constants.swift */; };
 		51BDAFFD203B6E3E003914F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BDAFFC203B6E3E003914F5 /* AppDelegate.swift */; };
 		51BDAFFF203B6E3E003914F5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BDAFFE203B6E3E003914F5 /* SignInViewController.swift */; };
@@ -55,6 +57,8 @@
 		2E8611B2E5ACAD090870F9D7 /* Pods-MDB Socials.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDB Socials.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MDB Socials/Pods-MDB Socials.debug.xcconfig"; sourceTree = "<group>"; };
 		31E6684A3027F62111350F45 /* Pods_MDB_SocialsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDB_SocialsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E3E4A49EDBA897306B10C1 /* Pods-MDB Socials.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDB Socials.release.xcconfig"; path = "Pods/Target Support Files/Pods-MDB Socials/Pods-MDB Socials.release.xcconfig"; sourceTree = "<group>"; };
+		514CFA7E204BD40F0011FD04 /* InterestedUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedUsersViewController.swift; sourceTree = "<group>"; };
+		514CFA81204BD5280011FD04 /* InterestedPplTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedPplTableViewCell.swift; sourceTree = "<group>"; };
 		515B5E5820493F1E00004E65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		51BDAFF9203B6E3E003914F5 /* MDB Socials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MDB Socials.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BDAFFC203B6E3E003914F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +126,15 @@
 				51BDB049203BB862003914F5 /* UserAuthHelper.swift */,
 			);
 			path = "Firebase Client";
+			sourceTree = "<group>";
+		};
+		514CFA80204BD41B0011FD04 /* InterestedUsers */ = {
+			isa = PBXGroup;
+			children = (
+				514CFA7E204BD40F0011FD04 /* InterestedUsersViewController.swift */,
+				514CFA81204BD5280011FD04 /* InterestedPplTableViewCell.swift */,
+			);
+			path = InterestedUsers;
 			sourceTree = "<group>";
 		};
 		515B5E5720493EFA00004E65 /* Constants */ = {
@@ -196,6 +209,7 @@
 				51BDB03A203B9D94003914F5 /* SignInController */,
 				51BDB03C203B9DC1003914F5 /* SignUpViewController */,
 				51BDB03F203B9E34003914F5 /* NewSocialViewController */,
+				514CFA80204BD41B0011FD04 /* InterestedUsers */,
 				51BDB03E203B9DFB003914F5 /* DetailViewController */,
 				51BDB03D203B9DE8003914F5 /* FeedViewController */,
 				51BDB050203D05D3003914F5 /* ImagePickerViewController */,
@@ -480,6 +494,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HanekeSwift/Haneke.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/LocationPicker/LocationPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/MKSpinner/MKSpinner.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
@@ -503,6 +518,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Haneke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LocationPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MKSpinner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
@@ -626,6 +642,7 @@
 			files = (
 				51BDB005203B6E3E003914F5 /* MDB_Socials.xcdatamodeld in Sources */,
 				51BDB04C203CEA77003914F5 /* EventCollectionViewCell.swift in Sources */,
+				514CFA82204BD5280011FD04 /* InterestedPplTableViewCell.swift in Sources */,
 				51BDB04A203BB862003914F5 /* UserAuthHelper.swift in Sources */,
 				51BDAFFF203B6E3E003914F5 /* SignInViewController.swift in Sources */,
 				51BDB032203B8F79003914F5 /* FeedViewController.swift in Sources */,
@@ -636,6 +653,7 @@
 				51BDB034203B8F8D003914F5 /* DetailViewController.swift in Sources */,
 				51BDB030203B8F34003914F5 /* SignUpViewController.swift in Sources */,
 				515B5E5920493F1F00004E65 /* Constants.swift in Sources */,
+				514CFA7F204BD40F0011FD04 /* InterestedUsersViewController.swift in Sources */,
 				51BDAFFD203B6E3E003914F5 /* AppDelegate.swift in Sources */,
 				51BDB048203BA08A003914F5 /* Post.swift in Sources */,
 			);

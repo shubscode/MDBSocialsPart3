@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A2B0EBB0A2DF56812596DBED1E68548D"
+               BlueprintIdentifier = "2B6A40C078D507DD8932BEFF0D96AFC2"
                BlueprintName = "Spring"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Spring.framework">

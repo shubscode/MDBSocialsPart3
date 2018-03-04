@@ -14,6 +14,7 @@ import PromiseKit
 import MKSpinner
 import ObjectMapper
 import SwiftyJSON
+import CoreLocation
 
 class FirebaseAPIClient {
     
@@ -82,6 +83,66 @@ class FirebaseAPIClient {
                 MKFullSpinner.hide()
                 fulfill(true)
             }
+        }
+    }
+    
+    static func createPost(selectedImage: UIImage, posterName: String, name: String, description: String, dateString: String, location: CLLocationCoordinate2D) -> Promise<Bool>{
+        let postsRef = Database.database().reference()
+        return Promise { fulfill, error in
+            let data = UIImagePNGRepresentation(selectedImage)!
+            let imageRef = Storage.storage().reference().child("postImages/" + name.trimmingCharacters(in: .whitespaces) + ".png")
+            imageRef.putData(data, metadata: nil) { (metadata, error) in
+                guard let metadata = metadata else {
+                    print("Error uploading")
+                    MKFullSpinner.hide()
+                    return
+                }
+                let downloadURL = String(describing: metadata.downloadURL()!)
+                print(downloadURL)
+                let posterId = UserAuthHelper.getCurrentUser()?.uid
+    
+                let postsRef = Database.database().reference().child("Posts")
+                let key = postsRef.childByAutoId().key
+                let newPost = ["postId": key, "posterName": posterName, "name": name, "pictureURL": downloadURL, "posterId": posterId!, "description": description, "date": dateString, "latitude": location.latitude, "longitude": location.longitude] as [String : Any]
+                let childUpdates = ["/\(key)/": newPost]
+                postsRef.updateChildValues(childUpdates)
+                print("Post created!")
+                fulfill(true)
+            }
+        }
+    }
+    
+    
+    static func getUserWithId(id: String) -> Promise<Users> {
+        return Promise { fulfill, error in
+            let usersRef = Database.database().reference().child("Users")
+            
+            //usersRef.setValue(["value": 5])
+            print("WHAT THE HACK")
+            print(id)
+            print(usersRef)
+            usersRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+                print("I GOT TO HERE")
+                //let name = snapshot.value
+                //let user = name! as? String
+                
+                let json = JSON(snapshot.value)
+                if let result = json.dictionaryObject {
+                    if let user = Users(JSON: result){
+                        fulfill(user)
+                    }
+                }
+                
+                
+                //print(user)
+                //fulfill(user!)
+//                let json = JSON(snapshot.value)
+//                if let result = json.dictionaryObject {
+//                    if let user = Users(JSON: result){
+//                        fulfill(user)
+//                    }
+//                }
+            })
         }
     }
     

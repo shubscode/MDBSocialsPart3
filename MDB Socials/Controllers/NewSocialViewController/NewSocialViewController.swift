@@ -9,6 +9,9 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import CoreLocation
+import LocationPicker
+import MKSpinner
 
 class NewSocialViewController: UIViewController, UITextViewDelegate {
 
@@ -21,6 +24,9 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
     var eventDate: String!
     var eventDescription: String!
     var imagePicked: UIImageView!
+    
+    var selectLocationButton: UIButton!
+    var selectedLocation: CLLocationCoordinate2D!
     
     var image = #imageLiteral(resourceName: "startingImage")
     
@@ -95,14 +101,22 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
         eventDescriptionTextView.clipsToBounds = true
         view.addSubview(eventDescriptionTextView)
         
-        imagePicked = UIImageView(frame: CGRect(x: view.frame.midX - 40, y: 420, width: 80, height: 80))
+        imagePicked = UIImageView(frame: CGRect(x: 20, y: 420, width: 130, height: 130))
         imagePicked.image = image
-        imagePicked.contentMode = .scaleAspectFit
+        imagePicked.contentMode = .scaleAspectFill
         imagePicked.clipsToBounds = true
         imagePicked.layer.cornerRadius = 10
         view.addSubview(imagePicked)
         
-        addPhotoButton = UIButton(frame: CGRect(x: 20, y: 510, width: view.frame.width - 40, height: 50))
+        selectLocationButton = UIButton(frame: CGRect(x: view.frame.midX, y: 420, width: 130, height: 130))
+        selectLocationButton.setTitle("Select Location", for: .normal)
+        selectLocationButton.layer.cornerRadius = 10
+        selectLocationButton.backgroundColor = UIColor.flatSkyBlue
+        selectLocationButton.setTitleColor(Constants.textColor, for: .normal)
+        selectLocationButton.addTarget(self, action: #selector(selectLocation), for: .touchUpInside)
+        view.addSubview(selectLocationButton)
+        
+        addPhotoButton = UIButton(frame: CGRect(x: 20, y: 570, width: view.frame.width - 40, height: 40))
         addPhotoButton.backgroundColor = customBlue
         addPhotoButton.layer.cornerRadius = 15
         addPhotoButton.setTitle("Add Photo", for: .normal)
@@ -110,7 +124,7 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
         view.addSubview(addPhotoButton)
         
         
-        createEventButton = UIButton(frame: CGRect(x: 20, y: 570, width: view.frame.width - 40, height: 50))
+        createEventButton = UIButton(frame: CGRect(x: 20, y: 620, width: view.frame.width - 40, height: 40))
         createEventButton.backgroundColor = customBlue
         createEventButton.layer.cornerRadius = 15
         createEventButton.setTitle("CREATE EVENT", for: .normal)
@@ -132,14 +146,37 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
         self.view.insertSubview(backgroundImage, at: 0)
     }
     
+    @objc func selectLocation() {
+        let locationPicker = LocationPickerViewController()
+        
+//        let location = CLLocation(latitude: 37.8719, longitude: 122.2585)
+//        let initialLocation = Location(name: "UC Berkeley", location: location, placemark: CLPlacemark() )
+//        locationPicker.location = initialLocation
+//
+        locationPicker.showCurrentLocationButton = true
+        locationPicker.currentLocationButtonBackground = Constants.loginColor!
+        locationPicker.showCurrentLocationInitially = true
+        locationPicker.mapType = .standard
+        locationPicker.useCurrentLocationAsHint = true
+        locationPicker.resultRegionDistance = 500
+        locationPicker.completion = { location in
+            self.selectedLocation = location?.coordinate
+        }
+        
+        self.present(locationPicker, animated: true) {
+            print("Selecting location")
+        }
+    }
+    
     func nullCheck() {
         print(eventName)
         print(eventDate)
         if eventName != nil && eventDate != nil {
             eventNameTextField.text = eventName
             eventDescriptionTextView.text = eventDescription
-            dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+            dateFormatter.dateFormat = "MM/dd/yyyy"
             let date = dateFormatter.date(from: eventDate)
+            
             datePicker.date = date!
         }
     }
@@ -159,7 +196,7 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
     @objc func datePickerValueChanged(_ sender: UIDatePicker){
         
         // Create date formatter
-        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+        dateFormatter.dateFormat = "MM/dd/yyyy"
         
         // Apply date format
         eventDate = dateFormatter.string(from: sender.date)
@@ -213,38 +250,60 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func returnToFeed() {
-        
-        let ref = Database.database().reference()
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
-        let eventImageData = UIImageJPEGRepresentation(imagePicked.image!, 0.9)
-        let userID = Auth.auth().currentUser?.uid
-        print(userID)
+        readEventInfo()
+        if selectedLocation == nil {
+            raiseInvalidInfoAlert(info: "Location")
+        } else {
+            MKFullSpinner.show("Creating Event", animated: true)
+            let ref = Database.database().reference()
+            let userID = Auth.auth().currentUser?.uid
+            print(userID)
             ref.child("Users").child(userID!).child("name").observeSingleEvent(of: .value, with: {(snapshot) in
             let name = snapshot.value
             let user = name! as? String
             print("USER IS \(user)")
-            let newPost = ["name" : self.eventName, "text": self.eventDescription, "date": self.eventDate, "poster": user,"interested": [""]] as [AnyHashable : Any]
-            let postRef = Database.database().reference().child("Posts")
-            let key = postRef.childByAutoId().key
-            let update = ["/\(key)/" : newPost]
-            //print("GOT TO HEREEEE AGAIN")
-            let storageRef = Storage.storage().reference().child("Posts").child(key)
-            storageRef.putData(eventImageData!, metadata: metadata, completion: { (metadata, error) in
-                if error != nil {
-                    print(error)
-                } else {
-                    postRef.updateChildValues(update)
-                    self.dismiss(animated: true)
-                }
+
+            
+                FirebaseAPIClient.createPost(selectedImage: self.imagePicked.image!, posterName: user!, name: self.eventName, description: self.eventDescription, dateString: self.eventDate, location: self.selectedLocation).then { success -> Void in
+                MKFullSpinner.hide()
+                self.dismiss(animated: true, completion: {
+                    print("Post Complete")
+                })
+            }
             })
-            
-            
-        })
+        }
+    }
+//        let ref = Database.database().reference()
+//        let metadata = StorageMetadata()
+//        metadata.contentType = "image/jpeg"
+//        let eventImageData = UIImageJPEGRepresentation(imagePicked.image!, 0.9)
+//        let userID = Auth.auth().currentUser?.uid
+//        print(userID)
+//            ref.child("Users").child(userID!).child("name").observeSingleEvent(of: .value, with: {(snapshot) in
+//            let name = snapshot.value
+//            let user = name! as? String
+//            print("USER IS \(user)")
+//            let newPost = ["name" : self.eventName, "text": self.eventDescription, "date": self.eventDate, "poster": user,"interested": [""]] as [AnyHashable : Any]
+//            let postRef = Database.database().reference().child("Posts")
+//            let key = postRef.childByAutoId().key
+//            let update = ["/\(key)/" : newPost]
+//            //print("GOT TO HEREEEE AGAIN")
+//            let storageRef = Storage.storage().reference().child("Posts").child(key)
+//            storageRef.putData(eventImageData!, metadata: metadata, completion: { (metadata, error) in
+//                if error != nil {
+//                    print(error)
+//                } else {
+//                    postRef.updateChildValues(update)
+//                    self.dismiss(animated: true)
+//                }
+//            })
+//            
+//            
+//        })
         
         
 
     }
 
-}
+
 

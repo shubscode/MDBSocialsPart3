@@ -27,7 +27,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         createBackground()
         setupPosts()
-        //fetchPosts()
+        fetchPosts()
         changePosts()
         
         let item1 = UIBarButtonItem(title: "Add New Event", style: .plain, target: self, action: #selector(createNewEvent))
@@ -67,7 +67,20 @@ class FeedViewController: UIViewController {
         
     }
     
-//    func fetchPosts() {
+    func fetchPosts() {
+        posts.removeAll()
+        FirebaseAPIClient.fetchPosts(withBlock: { posts in
+            for p in posts.reversed(){
+                self.posts.insert(p, at: 0)
+            }
+            self.posts = self.posts.sorted(by: { $0.getPostDate().compare($1.getPostDate()) == .orderedAscending })
+            
+            self.eventCollectionView.reloadData()
+            
+            
+        })
+        print(posts)
+        
 //        let ref = Database.database().reference()
 //        ref.child("Posts").observe(.childAdded, with: { (snapshot) in
 //            let post = Post(id: snapshot.key, postDict: snapshot.value as! [String : Any]?)
@@ -76,7 +89,7 @@ class FeedViewController: UIViewController {
 //                self.eventCollectionView.reloadData()
 //            })
 //        })
-//    }
+    }
     
     func changePosts() {
         let ref = Database.database().reference()
@@ -122,16 +135,48 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = eventCollectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCollectionViewCell
         let selectedEvent = posts[indexPath.row]
+        print("Making CELLS")
+
+        if selectedEvent.image == nil {
+            selectedEvent.getPicture().then { success -> Void in
+                cell.imageView.image = selectedEvent.image
+            }
+        }
+        else{
+            cell.imageView.image = selectedEvent.image
+        }
         
         cell.title = selectedEvent.eventName
         cell.image = selectedEvent.image
         cell.content = selectedEvent.eventDescription
         cell.date = selectedEvent.eventDate
-        cell.name = selectedEvent.posterName
-        var numInterested =
-        print(selectedEvent.getNumInterested())
-        cell.interested = "Interested: \(selectedEvent.getNumInterested())"
-
+        
+        
+      
+        
+        var temp = ""
+        if selectedEvent.posterName == nil {
+            print("GONNA MESS THINGS UP")
+            FirebaseAPIClient.getUserWithId(id: selectedEvent.posterId!).then { user in
+                DispatchQueue.main.async {
+                    //print(name)
+                    print("GONNA MESS THINGS UP AGAIN")
+                    cell.name = user.name
+                    selectedEvent.posterName = user.name
+                }
+            }
+                    
+            }
+        else{
+            cell.name = selectedEvent.posterName!
+        }
+        print(selectedEvent.posterName)
+        
+        //cell.name = selectedEvent.posterName
+        let numInterested = selectedEvent.getNumInterested()
+        print("PEOPLE INTERESTED: \(selectedEvent.getNumInterested())")
+        cell.interested = "Interested: \(numInterested)"
+        
         //cell.eventPost = selectedEvent
         cell.awakeFromNib()
         

@@ -26,6 +26,7 @@ target 'MDB Socials' do
   pod 'PromiseKit/Alamofire'
   pod 'ObjectMapper'
   pod 'SwiftyBeaver'
+  pod 'LocationPicker'
   target 'MDB SocialsTests' do
     inherit! :search_paths
     # Pods for testing
