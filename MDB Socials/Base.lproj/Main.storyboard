@@ -29,7 +29,7 @@
             </objects>
             <point key="canvasLocation" x="-508" y="125"/>
         </scene>
-        <!--Feed View Controller-->
+        <!--My Feed-->
         <scene sceneID="t51-no-Lbx">
             <objects>
                 <viewController id="aOf-vi-Ipd" customClass="FeedViewController" customModule="MDB_Socials" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,6 +39,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="drL-GQ-42u"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="My Feed" image="mainFeed" id="kXP-iS-qSe"/>
                     <navigationItem key="navigationItem" id="nF9-rr-ToC"/>
                     <connections>
                         <segue destination="5oo-Vg-jZu" kind="show" identifier="toEventDetails" id="gNl-mP-Bg5"/>
@@ -48,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DSd-UB-gan" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1039" y="125"/>
+            <point key="canvasLocation" x="1671.2" y="124.58770614692655"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="l7g-uc-yLa">
@@ -66,7 +67,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="82V-MH-amP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1817" y="125"/>
+            <point key="canvasLocation" x="2487.1999999999998" y="124.58770614692655"/>
         </scene>
         <!--Interested Users View Controller-->
         <scene sceneID="eYx-wR-Q8k">
@@ -81,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FcG-mR-Okm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2538" y="125"/>
+            <point key="canvasLocation" x="3367.1999999999998" y="124.58770614692655"/>
         </scene>
         <!--New Social View Controller-->
         <scene sceneID="cHf-ji-7B8">
@@ -100,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgX-dL-y9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1376.8" y="855.9220389805098"/>
+            <point key="canvasLocation" x="1332" y="927"/>
         </scene>
         <!--Image Picker View Controller-->
         <scene sceneID="GDf-Ji-aLw">
@@ -118,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heP-cA-mg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2111.1999999999998" y="855.9220389805098"/>
+            <point key="canvasLocation" x="2226" y="927"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="BWY-8y-hDD">
@@ -149,7 +150,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="aOf-vi-Ipd" kind="relationship" relationship="rootViewController" id="HRs-6w-vak"/>
+                        <segue destination="YM8-pM-VYQ" kind="relationship" relationship="rootViewController" id="HRs-6w-vak"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8B-kA-lW3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -172,9 +173,48 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gD3-Y1-NoP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="606" y="856"/>
+            <point key="canvasLocation" x="598" y="927"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="V1Y-E3-Gx3">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YM8-pM-VYQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="DRi-5o-f2d"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iS0-4z-TiF">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="aOf-vi-Ipd" kind="relationship" relationship="viewControllers" id="pMv-jA-GPp"/>
+                        <segue destination="jq8-40-Iqg" kind="relationship" relationship="viewControllers" id="O4D-mE-syp"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LTa-dy-Fan" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1012" y="-718"/>
+        </scene>
+        <!--My Events-->
+        <scene sceneID="lDo-TW-gBQ">
+            <objects>
+                <viewController id="jq8-40-Iqg" customClass="MyEventsViewController" customModule="MDB_Socials" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5j1-5J-jqr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Htz-CU-AxT"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="My Events" image="myEvents" id="2vd-EH-kKk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RDy-ZY-58e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1902" y="-718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mainFeed" width="25" height="25"/>
+        <image name="myEvents" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RFE-df-jJg"/>
         <segue reference="cja-zj-kVV"/>

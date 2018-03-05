@@ -77,7 +77,7 @@ class DetailViewController: UIViewController {
     }
     
     func createMapView() {
-        mapView = MKMapView(frame: CGRect(x: view.frame.width * 0.65, y: view.frame.height * 0.13, width: view.frame.width * 0.35, height: view.frame.height * 0.27))
+        mapView = MKMapView(frame: CGRect(x: view.frame.width * 0.67, y: view.frame.height * 0.13, width: view.frame.width * 0.28, height: view.frame.height * 0.27))
         mapView.mapType = .standard
         mapView.layer.cornerRadius = 10
         mapView.layer.masksToBounds = true
@@ -122,6 +122,7 @@ class DetailViewController: UIViewController {
         //postBodyTextField.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 8)
         postBodyTextField.layer.cornerRadius = 8
         postBodyTextField.backgroundColor = .white
+        postBodyTextField.textAlignment = .center
         view.addSubview(postBodyTextField)
     }
     
@@ -137,7 +138,10 @@ class DetailViewController: UIViewController {
         interestedButton.titleLabel?.adjustsFontSizeToFitWidth = true
         if(post.getInterestedUserIds().contains((Auth.auth().currentUser?.uid)!)){
             interestedButton.isEnabled = false
-            interestedButton.setTitle("Already interested", for: .normal)
+            interestedButton.titleLabel?.numberOfLines = 0
+            interestedButton.titleLabel?.lineBreakMode = .byWordWrapping
+            interestedButton.setTitle("Already\rinterested", for: .normal)
+            interestedButton.titleLabel?.textAlignment = .center
             interestedButton.titleLabel?.adjustsFontSizeToFitWidth = true
         } else {
             interestedButton.addTarget(self, action: #selector(increaseInterested), for: .touchUpInside)
@@ -149,7 +153,10 @@ class DetailViewController: UIViewController {
         getDirectionsButton = UIButton(frame: CGRect(x: view.frame.width * 0.37, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
         getDirectionsButton.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
         getDirectionsButton.layer.cornerRadius = 10
-        getDirectionsButton.setTitle("Get Directions", for: .normal)
+        getDirectionsButton.titleLabel?.numberOfLines = 0
+        getDirectionsButton.titleLabel?.lineBreakMode = .byWordWrapping
+        getDirectionsButton.setTitle("Get\rDirections", for: .normal)
+        getDirectionsButton.titleLabel?.textAlignment = .center
         getDirectionsButton.setTitleColor(Constants.loginColor, for: .normal)
         getDirectionsButton.backgroundColor = .white
         getDirectionsButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -160,7 +167,10 @@ class DetailViewController: UIViewController {
         whosInterested = UIButton(frame: CGRect(x: view.frame.width * 0.6833, y: view.frame.height * 0.8, width: view.frame.width * 0.2667, height: view.frame.height * 0.12))
         whosInterested.addTarget(self, action: #selector(whosInterestedSegue), for: .touchUpInside)
         whosInterested.layer.cornerRadius = 10
-        whosInterested.setTitle("Who's Interested", for: .normal)
+        whosInterested.titleLabel?.numberOfLines = 0
+        whosInterested.titleLabel?.lineBreakMode = .byWordWrapping
+        whosInterested.setTitle("See Who's\rInterested", for: .normal)
+        whosInterested.titleLabel?.textAlignment = .center
         whosInterested.setTitleColor(Constants.loginColor, for: .normal)
         whosInterested.backgroundColor = .white
         whosInterested.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -193,7 +203,10 @@ class DetailViewController: UIViewController {
             print("Updated interested")
             
             self.interestedButton.isEnabled = false
-            self.interestedButton.setTitle("You are already interested", for: .normal)
+            self.interestedButton.titleLabel?.numberOfLines = 0
+            self.interestedButton.titleLabel?.lineBreakMode = .byWordWrapping
+            self.interestedButton.setTitle("You are\ralready interested", for: .normal)
+            
             self.post.addInterestedUser(userID: (UserAuthHelper.getCurrentUser()?.uid)!)
             //self.interestedLabel.text = "Members Interested: " + String(describing: self.viewController.post.getInterestedUserIds().count)
         }

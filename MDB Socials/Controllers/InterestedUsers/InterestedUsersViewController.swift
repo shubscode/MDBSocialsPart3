@@ -61,10 +61,12 @@ extension InterestedUsersViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "user", for: indexPath) as! InterestedPplTableViewCell
         let user = filteredUsers[indexPath.row]
+        cell.awakeFromNib()
         print(userIDArray)
         print("CREATING USERS")
         print(user)
         print(user.id)
+        print(user.name)
         cell.name.text = user.name!
         if user.profilePicture == nil {
             user.getPicture().then { picture in
@@ -76,7 +78,7 @@ extension InterestedUsersViewController: UITableViewDelegate, UITableViewDataSou
         }
         
             
-        cell.awakeFromNib()
+        
         
         cell.isUserInteractionEnabled = false
         

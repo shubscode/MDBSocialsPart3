@@ -132,16 +132,7 @@ class FirebaseAPIClient {
                         fulfill(user)
                     }
                 }
-                
-                
-                //print(user)
-                //fulfill(user!)
-//                let json = JSON(snapshot.value)
-//                if let result = json.dictionaryObject {
-//                    if let user = Users(JSON: result){
-//                        fulfill(user)
-//                    }
-//                }
+        
             })
         }
     }

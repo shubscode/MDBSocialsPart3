@@ -27,7 +27,7 @@ class Users : Mappable {
     }
     
     func mapping(map: Map) {
-        id                  <- map["id"]
+        id                  <- map["userID"]
         name                <- map["name"]
         username            <- map["username"]
         profilePictureURL   <- map["profilePictureURL"]
@@ -48,6 +48,7 @@ class Users : Mappable {
             }
         }
     }
+    
     
 
     
