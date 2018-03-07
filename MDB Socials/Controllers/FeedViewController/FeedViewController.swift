@@ -30,14 +30,6 @@ class FeedViewController: UIViewController {
         fetchPosts()
         changePosts()
         
-        let item1 = UIBarButtonItem(title: "Add New Event", style: .plain, target: self, action: #selector(createNewEvent))
-        self.navigationItem.setRightBarButtonItems([item1], animated: true)
-        //setUpCollectionView()
-        
-        let item2 = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logoutUser))
-        self.navigationItem.setLeftBarButtonItems([item2], animated: true)
-        
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false;
@@ -56,16 +48,16 @@ class FeedViewController: UIViewController {
         view.addSubview(eventCollectionView)
     }
     
-    @objc func createNewEvent() {
-        self.performSegue(withIdentifier: "toNewEvent", sender: self)
-    }
-    
-    @objc func logoutUser() {
-        UserAuthHelper.logOut().then {success -> Void in
-            self.performSegue(withIdentifier: "logoutSegue", sender: self)
-        }
-        
-    }
+//    @objc func createNewEvent() {
+//        self.performSegue(withIdentifier: "toNewEvent", sender: self)
+//    }
+//    
+//    @objc func logoutUser() {
+//        UserAuthHelper.logOut().then {success -> Void in
+//            self.performSegue(withIdentifier: "logoutSegue", sender: self)
+//        }
+//        
+//    }
     
     func fetchPosts() {
         posts.removeAll()
@@ -80,15 +72,6 @@ class FeedViewController: UIViewController {
             
         })
         print(posts)
-        
-//        let ref = Database.database().reference()
-//        ref.child("Posts").observe(.childAdded, with: { (snapshot) in
-//            let post = Post(id: snapshot.key, postDict: snapshot.value as! [String : Any]?)
-//            self.posts.insert(post, at: 0)
-//            post.getProfilePic(withBlock: {
-//                self.eventCollectionView.reloadData()
-//            })
-//        })
     }
     
     func changePosts() {
@@ -135,7 +118,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = eventCollectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCollectionViewCell
         let selectedEvent = posts[indexPath.row]
-        print("Making CELLS")
 
         if selectedEvent.image == nil {
             selectedEvent.getPicture().then { success -> Void in
@@ -156,11 +138,9 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         var temp = ""
         if selectedEvent.posterName == nil {
-            print("GONNA MESS THINGS UP")
             FirebaseAPIClient.getUserWithId(id: selectedEvent.posterId!).then { user in
                 DispatchQueue.main.async {
                     //print(name)
-                    print("GONNA MESS THINGS UP AGAIN")
                     cell.name = user.name
                     selectedEvent.posterName = user.name
                 }
@@ -174,7 +154,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         //cell.name = selectedEvent.posterName
         let numInterested = selectedEvent.getNumInterested()
-        print("PEOPLE INTERESTED: \(selectedEvent.getNumInterested())")
         cell.interested = "Interested: \(numInterested)"
         
         //cell.eventPost = selectedEvent

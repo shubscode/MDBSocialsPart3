@@ -21,6 +21,7 @@ class Users : Mappable {
     var username: String?
     var profilePictureURL: String?
     var id: String?
+    var myEventsArray = [String]()
     
     required init?(map: Map) {
         
@@ -32,6 +33,7 @@ class Users : Mappable {
         username            <- map["username"]
         profilePictureURL   <- map["profilePictureURL"]
         email               <- map["email"]
+        myEventsArray       <- map["myEventsArray"]
     }
     
     func getPicture() -> Promise<UIImage> {

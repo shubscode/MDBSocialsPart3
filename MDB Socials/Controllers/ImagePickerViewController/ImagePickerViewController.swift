@@ -8,6 +8,7 @@
 
 import UIKit
 import MKSpinner
+import MapKit
 
 class ImagePickerViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
@@ -25,7 +26,8 @@ UINavigationControllerDelegate {
     var eventName: String!
     var eventDate: String!
     var eventDescription: String!
-    
+    var selectedLocation: CLLocationCoordinate2D!
+
     
     //var saveButton: UIButton!
     
@@ -82,6 +84,7 @@ UINavigationControllerDelegate {
                 destinationVC.eventName = self.eventName
                 destinationVC.eventDate = self.eventDate
                 destinationVC.eventDescription = self.eventDescription
+                destinationVC.selectedLocation = self.selectedLocation
             }
         }
     }

@@ -20,14 +20,8 @@ class FirebaseAPIClient {
     
     
     static func fetchPosts(withBlock: @escaping ([Post]) -> ()) {
-//        //TODO: Implement a method to fetch posts with Firebase!
-//        let ref = Database.database().reference()
-//        ref.child("Posts").observe(.childAdded, with: { (snapshot) in
-//            let post = Post(id: snapshot.key, postDict: snapshot.value as! [String : Any]?)
-//            withBlock([post])
-//        })
+
         let postsRef = Database.database().reference()
-        print("Fetching Posts")
         postsRef.child("Posts").observe(.childAdded, with: { (snapshot) in
             let json = JSON(snapshot.value)
             if let result = json.dictionaryObject {
@@ -38,14 +32,7 @@ class FirebaseAPIClient {
         })
     }
     
-//    static func fetchUser(id: String, withBlock: @escaping (User) -> ()) {
-//        let ref = Database.database().reference()
-//        ref.child("Users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
-//            let user = User(id: snapshot.key, userDict: snapshot.value as! [String : Any]?)
-//            withBlock(user)
-//
-//        })
-//    }
+
     
     static func createNewPost(postDict: [String: Any]?) {
         let postsRef = Database.database().reference().child("Posts")
@@ -75,10 +62,14 @@ class FirebaseAPIClient {
                     MKFullSpinner.hide()
                     return
                 }
+                
                 let downloadURL = String(describing: metadata.downloadURL()!)
                 let userID = String(describing: UserAuthHelper.getCurrentUser()!.uid)
-                let newUser = ["name": name, "username": username, "email": email, "profilePictureURL": downloadURL, "userID": userID] as [String : Any]
+                let newUser = ["name": name, "username": username, "email": email, "profilePictureURL": downloadURL, "userID": userID, "myEvents": [String]()] as [String : Any]
                 let childUpdates = ["/\(userID)/": newUser]
+                print("FIREBASE PLEASE WORK")
+                print(newUser)
+                print(childUpdates)
                 usersRef.updateChildValues(childUpdates)
                 MKFullSpinner.hide()
                 fulfill(true)
@@ -98,15 +89,30 @@ class FirebaseAPIClient {
                     return
                 }
                 let downloadURL = String(describing: metadata.downloadURL()!)
-                print(downloadURL)
+                //print(downloadURL)
                 let posterId = UserAuthHelper.getCurrentUser()?.uid
+                
+                
     
                 let postsRef = Database.database().reference().child("Posts")
                 let key = postsRef.childByAutoId().key
                 let newPost = ["postId": key, "posterName": posterName, "name": name, "pictureURL": downloadURL, "posterId": posterId!, "description": description, "date": dateString, "latitude": location.latitude, "longitude": location.longitude] as [String : Any]
                 let childUpdates = ["/\(key)/": newPost]
                 postsRef.updateChildValues(childUpdates)
-                print("Post created!")
+                //print("Post created!")
+                let userRef = Database.database().reference().child("Users").child(posterId!).child("myEvents")
+                userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                    var arr = snapshot.value
+                    if arr is NSNull {
+                        arr = [key]
+                        userRef.setValue(arr)
+                    } else {
+                        print("Adding to Array")
+                        var myeventsArray =  arr as! [String]
+                        myeventsArray.append(key)
+                        userRef.setValue(myeventsArray)
+                    }
+                })
                 fulfill(true)
             }
         }
@@ -118,11 +124,7 @@ class FirebaseAPIClient {
             let usersRef = Database.database().reference().child("Users")
             
             //usersRef.setValue(["value": 5])
-            print("WHAT THE HACK")
-            print(id)
-            print(usersRef)
             usersRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
-                print("I GOT TO HERE")
                 //let name = snapshot.value
                 //let user = name! as? String
                 
@@ -136,6 +138,22 @@ class FirebaseAPIClient {
             })
         }
     }
+    static func getPostWithId(id: String) -> Promise<Post> {
+        return Promise { fulfill, error in
+            let postsRef = Database.database().reference().child("Posts")
+            
+            postsRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+                let json = JSON(snapshot.value)
+                if let result = json.dictionaryObject {
+                    if let post = Post(JSON: result){
+                        fulfill(post)
+                    }
+                }
+                
+            })
+        }
+    }
+    
     
     static func updateInterested(postId: String, userId: String) -> Promise<Bool> {
         return Promise { fulfill, _ in
@@ -160,6 +178,25 @@ class FirebaseAPIClient {
             })
         }
     }
+    
+    static func getMyEvents(userID: String) -> Promise<[String]>{
+        return Promise { fulfill, _ in
+            let ref = Database.database().reference()
+            ref.child("Users").child(userID).child("myEvents").observeSingleEvent(of: .value, with: { (snapshot) in
+                print("TRYING TO GET EVENTS")
+                var events: [String] = []
+                for child in snapshot.children {
+                    print("THESE ARE MY CHILDREN")
+                    let snap = child as! DataSnapshot
+                    let value = snap.value as! String
+                    print(value)
+                    events.append(value)
+                }
+                fulfill(events)
+            })
+        }
+    }
+    
 }
 
 

@@ -161,6 +161,7 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
         locationPicker.resultRegionDistance = 500
         locationPicker.completion = { location in
             self.selectedLocation = location?.coordinate
+            self.selectLocationButton.setTitle("Location Selected", for: .normal)
         }
         
         self.present(locationPicker, animated: true) {
@@ -235,11 +236,10 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toImagePicker" {
             if let destinationVC = segue.destination as? ImagePickerViewController {
-                print("help2")
                 destinationVC.eventName = self.eventName
                 destinationVC.eventDate = self.eventDate
                 destinationVC.eventDescription = self.eventDescription
-                print("help3")
+                destinationVC.selectedLocation = self.selectedLocation
             }
         }
     }
@@ -251,6 +251,9 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
     
     @objc func returnToFeed() {
         readEventInfo()
+        if imagePicked.image == nil {
+            raiseInvalidInfoAlert(info: "Image")
+        }
         if selectedLocation == nil {
             raiseInvalidInfoAlert(info: "Location")
         } else {
@@ -273,34 +276,7 @@ class NewSocialViewController: UIViewController, UITextViewDelegate {
             })
         }
     }
-//        let ref = Database.database().reference()
-//        let metadata = StorageMetadata()
-//        metadata.contentType = "image/jpeg"
-//        let eventImageData = UIImageJPEGRepresentation(imagePicked.image!, 0.9)
-//        let userID = Auth.auth().currentUser?.uid
-//        print(userID)
-//            ref.child("Users").child(userID!).child("name").observeSingleEvent(of: .value, with: {(snapshot) in
-//            let name = snapshot.value
-//            let user = name! as? String
-//            print("USER IS \(user)")
-//            let newPost = ["name" : self.eventName, "text": self.eventDescription, "date": self.eventDate, "poster": user,"interested": [""]] as [AnyHashable : Any]
-//            let postRef = Database.database().reference().child("Posts")
-//            let key = postRef.childByAutoId().key
-//            let update = ["/\(key)/" : newPost]
-//            //print("GOT TO HEREEEE AGAIN")
-//            let storageRef = Storage.storage().reference().child("Posts").child(key)
-//            storageRef.putData(eventImageData!, metadata: metadata, completion: { (metadata, error) in
-//                if error != nil {
-//                    print(error)
-//                } else {
-//                    postRef.updateChildValues(update)
-//                    self.dismiss(animated: true)
-//                }
-//            })
-//            
-//            
-//        })
-        
+
         
 
     }

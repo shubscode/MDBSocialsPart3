@@ -30,6 +30,7 @@
 		51BDB04A203BB862003914F5 /* UserAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BDB049203BB862003914F5 /* UserAuthHelper.swift */; };
 		51BDB04C203CEA77003914F5 /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BDB04B203CEA77003914F5 /* EventCollectionViewCell.swift */; };
 		51BDB04F203D05CD003914F5 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BDB04E203D05CD003914F5 /* ImagePickerViewController.swift */; };
+		51F23758204E8A5500C20A18 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F23757204E8A5500C20A18 /* TabBarController.swift */; };
 		963F2F0100A960DD2B3ABD9A /* Pods_MDB_SocialsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C440DAFD3F44D30BE76507AF /* Pods_MDB_SocialsTests.framework */; };
 		C997EC6B929B6E6700CE2DF2 /* Pods_MDB_Socials.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7EC24EE865FB30B63D43BC /* Pods_MDB_Socials.framework */; };
 		EE71EE7FD07731A814F55777 /* Pods_MDB_SocialsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E6684A3027F62111350F45 /* Pods_MDB_SocialsUITests.framework */; };
@@ -87,6 +88,7 @@
 		51BDB049203BB862003914F5 /* UserAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthHelper.swift; sourceTree = "<group>"; };
 		51BDB04B203CEA77003914F5 /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		51BDB04E203D05CD003914F5 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
+		51F23757204E8A5500C20A18 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AA7EC24EE865FB30B63D43BC /* Pods_MDB_Socials.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDB_Socials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBFD98EC3935F835E8EDF99 /* Pods-MDB SocialsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDB SocialsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MDB SocialsTests/Pods-MDB SocialsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C440DAFD3F44D30BE76507AF /* Pods_MDB_SocialsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDB_SocialsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,14 @@
 				514CFA83204D41A50011FD04 /* MyEventsViewController.swift */,
 			);
 			path = MyEvents;
+			sourceTree = "<group>";
+		};
+		514CFA88204E89980011FD04 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				51F23757204E8A5500C20A18 /* TabBarController.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		515B5E5720493EFA00004E65 /* Constants */ = {
@@ -222,6 +232,7 @@
 				51BDB03F203B9E34003914F5 /* NewSocialViewController */,
 				514CFA80204BD41B0011FD04 /* InterestedUsers */,
 				51BDB03E203B9DFB003914F5 /* DetailViewController */,
+				514CFA88204E89980011FD04 /* TabBarController */,
 				51BDB03D203B9DE8003914F5 /* FeedViewController */,
 				51BDB050203D05D3003914F5 /* ImagePickerViewController */,
 			);
@@ -654,6 +665,7 @@
 				51BDB005203B6E3E003914F5 /* MDB_Socials.xcdatamodeld in Sources */,
 				51BDB04C203CEA77003914F5 /* EventCollectionViewCell.swift in Sources */,
 				514CFA82204BD5280011FD04 /* InterestedPplTableViewCell.swift in Sources */,
+				51F23758204E8A5500C20A18 /* TabBarController.swift in Sources */,
 				51BDB04A203BB862003914F5 /* UserAuthHelper.swift in Sources */,
 				51BDAFFF203B6E3E003914F5 /* SignInViewController.swift in Sources */,
 				51BDB032203B8F79003914F5 /* FeedViewController.swift in Sources */,

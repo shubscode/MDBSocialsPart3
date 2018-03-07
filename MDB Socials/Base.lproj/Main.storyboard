@@ -178,16 +178,19 @@
         <!--Tab Bar Controller-->
         <scene sceneID="V1Y-E3-Gx3">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YM8-pM-VYQ" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YM8-pM-VYQ" customClass="TabBarController" customModule="MDB_Socials" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="DRi-5o-f2d"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iS0-4z-TiF">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="aOf-vi-Ipd" kind="relationship" relationship="viewControllers" id="pMv-jA-GPp"/>
                         <segue destination="jq8-40-Iqg" kind="relationship" relationship="viewControllers" id="O4D-mE-syp"/>
+                        <segue destination="ISF-lP-LCm" kind="presentation" identifier="toNewSocial" id="Mp6-az-MXk"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="backToSignIn" id="6CF-Qq-kug"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LTa-dy-Fan" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -205,6 +208,9 @@
                         <viewLayoutGuide key="safeArea" id="Htz-CU-AxT"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Events" image="myEvents" id="2vd-EH-kKk"/>
+                    <connections>
+                        <segue destination="5oo-Vg-jZu" kind="show" identifier="toEventDetails" id="Edh-3W-knp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDy-ZY-58e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -216,7 +222,11 @@
         <image name="myEvents" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2L4-Vd-9pr"/>
+        <segue reference="Mp6-az-MXk"/>
         <segue reference="RFE-df-jJg"/>
         <segue reference="cja-zj-kVV"/>
+        <segue reference="Edh-3W-knp"/>
+        <segue reference="6CF-Qq-kug"/>
     </inferredMetricsTieBreakers>
 </document>
