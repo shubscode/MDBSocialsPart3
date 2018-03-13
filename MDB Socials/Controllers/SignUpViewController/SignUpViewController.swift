@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
+import SwiftyBeaver
 class SignUpViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
     
@@ -200,7 +201,7 @@ UINavigationControllerDelegate {
         
         UserAuthHelper.createUser(name: name, username: username, email: email, password: password, image: profileImage.image!, view: self, withBlock: { (user) in
             self.dismiss(animated: true, completion: {
-                print("Finished creating user!")
+                log.verbose("Finished creating a user!")
                 self.emailTextField.text = ""
                 self.passwordTextField.text = ""
                 self.nameTextField.text = ""
