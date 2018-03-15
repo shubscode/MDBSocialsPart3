@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Firebase
 import SwiftyBeaver
+import LyftSDK
 let log = SwiftyBeaver.self
 
 @UIApplicationMain  
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        LyftConfiguration.developer = (token: "bUr+bcoFSkqbVU5RZHf/pj6nH+Ft7s4pjsjSrPMwwHXaOnHGsFOElx4j2YPC7/KBPwnXBkW2n7AXv0JyVYNdSH0roXI0CkJ8QKBCrRzO25qeKOWzre4yipM=", clientId: "y0vrHO613hFK")
+
         let console = ConsoleDestination()  // log to Xcode Console
         let file = FileDestination()  // log to default swiftybeaver.log file
         // use custom format and set console output to short time, log level & message
