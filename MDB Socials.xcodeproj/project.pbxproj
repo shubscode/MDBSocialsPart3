@@ -15,6 +15,7 @@
 		5184BEC72058E9BA006586E8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5184BEC62058E9BA006586E8 /* SignUpView.swift */; };
 		5184BEC92058F5EC006586E8 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5184BEC82058F5EC006586E8 /* DetailView.swift */; };
 		5184BECB20599A3D006586E8 /* NewSocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5184BECA20599A3D006586E8 /* NewSocialView.swift */; };
+		5184BECD2059FD3B006586E8 /* AlamofireClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5184BECC2059FD3B006586E8 /* AlamofireClient.swift */; };
 		51BDAFFD203B6E3E003914F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BDAFFC203B6E3E003914F5 /* AppDelegate.swift */; };
 		51BDAFFF203B6E3E003914F5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BDAFFE203B6E3E003914F5 /* SignInViewController.swift */; };
 		51BDB002203B6E3E003914F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BDB000203B6E3E003914F5 /* Main.storyboard */; };
@@ -72,6 +73,7 @@
 		5184BEC62058E9BA006586E8 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5184BEC82058F5EC006586E8 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		5184BECA20599A3D006586E8 /* NewSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSocialView.swift; sourceTree = "<group>"; };
+		5184BECC2059FD3B006586E8 /* AlamofireClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireClient.swift; sourceTree = "<group>"; };
 		51BDAFF9203B6E3E003914F5 /* MDB Socials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MDB Socials.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BDAFFC203B6E3E003914F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51BDAFFE203B6E3E003914F5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				51BDB041203B9EC1003914F5 /* FirebaseAPIClient.swift */,
+				5184BECC2059FD3B006586E8 /* AlamofireClient.swift */,
 				51FE69402058D74200435220 /* LyftHelper.swift */,
 				51BDB049203BB862003914F5 /* UserAuthHelper.swift */,
 			);
@@ -691,6 +694,7 @@
 				51BDB005203B6E3E003914F5 /* MDB_Socials.xcdatamodeld in Sources */,
 				51BDB04C203CEA77003914F5 /* EventCollectionViewCell.swift in Sources */,
 				514CFA82204BD5280011FD04 /* InterestedPplTableViewCell.swift in Sources */,
+				5184BECD2059FD3B006586E8 /* AlamofireClient.swift in Sources */,
 				51F23758204E8A5500C20A18 /* TabBarController.swift in Sources */,
 				51BDB04A203BB862003914F5 /* UserAuthHelper.swift in Sources */,
 				5184BECB20599A3D006586E8 /* NewSocialView.swift in Sources */,

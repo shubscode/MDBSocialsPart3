@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import PromiseKit
 
 import SwiftyBeaver
 
@@ -63,17 +64,40 @@ class FeedViewController: UIViewController {
     
     func fetchPosts() {
         posts.removeAll()
+        
+//        AlamofireClient.getPosts().then{ posts in
+//            self.refreshTable(posts: posts)
+//        }
+//        firstly {
+//            return AlamofireClient.getPosts()
+//            }.then { posts in
+//                self.refreshTable(posts: posts)
+//        }
+//        AlamofireClient.getPosts().then{}
+//
         FirebaseAPIClient.fetchPosts(withBlock: { posts in
             for p in posts.reversed(){
                 self.posts.insert(p, at: 0)
             }
             self.posts = self.posts.sorted(by: { $0.getPostDate().compare($1.getPostDate()) == .orderedAscending })
-            
+
             self.eventCollectionView.reloadData()
-            
-            
+
+
         })
         print(posts)
+    }
+    
+    func refreshTable(posts: [Post]){
+        for p in posts{
+            print(p)
+            if !(p.getDateFromString().timeIntervalSinceNow < 0) {
+                self.posts.insert(p, at: 0)
+            }
+        }
+        self.posts = self.posts.sorted(by: { $0.getDateFromString().compare($1.getDateFromString()) == .orderedAscending })
+        
+        self.eventCollectionView.reloadData()
     }
     
     func changePosts() {

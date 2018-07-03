@@ -16,7 +16,7 @@ class AlamofireClient {
     
     static func getPosts() -> Promise<[Post]> {
         return Promise { fufill, error in
-            Alamofire.request("https://mdb-socials.herokuapp.com/posts").responseJSON { response in
+            Alamofire.request("https://mdbsocials.herokuapp.com/Posts").responseJSON { response in
                 if let response = response.result.value {
                     let json = JSON(response)
                     //print(dataJSON)
@@ -24,6 +24,7 @@ class AlamofireClient {
                     for e in json {
                         if let result = e.1.dictionaryObject {
                             if let post = Post(JSON: result){
+                                print("ENTERED THIS THUNG")
                                 postArray.append(post)
                             }
                         }

@@ -77,6 +77,12 @@ class Post: Mappable {
         return dateFormatter.date(from: eventDate!)!
         }
     
+    func getDateFromString() -> Date{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: eventDate!)!
+    }
+    
     
     func getPicture() -> Promise<Bool> {
         return Promise { fufill, _ in
